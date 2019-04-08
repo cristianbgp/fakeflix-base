@@ -1,6 +1,7 @@
 class Serie < ApplicationRecord
   has_many :episodes
   has_many :rentals, as: :rentable
+  enum status: [:coming_soon, :preorder, :billboard]
 end
 
 # == Schema Information
