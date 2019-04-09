@@ -6,13 +6,15 @@ movie = Movie.create(
   duration: (rand(7200) / 3600.00).round(2),
   price: rand(100),
   rating: rand(5) + 1,
-  title: Faker::Movie.quote
+  title: Faker::Movie.quote,
+  status: rand(3)
 )
 serie = Serie.create(
   description: Faker::Movies::VForVendetta.quote,
   price: rand(100),
   rating: rand(5) + 1,
-  title: Faker::Movie.quote
+  title: Faker::Movie.quote,
+  status: rand(3)
 )
 
 5.times do
