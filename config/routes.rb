@@ -3,8 +3,8 @@ Rails.application.routes.draw do
   namespace :api do
     resources :movies, only: [:index, :show] do
       member do
-        put "playback"
-        put "rating"
+        patch "playback"
+        patch "rating"
       end
     end
 
