@@ -13,7 +13,7 @@ module Api
     end
 
     def rating
-      Serie.update(params[:id], :rating => params[:rating])
+      Serie.update(params[:id], rating: params[:rating])
       render json: { message: "Update successfull rating serie" }, status: :ok
     end
   end

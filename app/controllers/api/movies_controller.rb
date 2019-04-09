@@ -20,7 +20,7 @@ module Api
     end
   
     def rating
-      Movie.update(params[:id], :rating => params[:rating])
+      Movie.update(params[:id], rating: params[:rating])
       render json: { message: "Update rating movie" }, status: :ok
     end
   
