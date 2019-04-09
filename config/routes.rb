@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     resources :rentals, only: [:index, :show] do
       collection do
         post 'movies/:id' => :movie
-        post 'series/:id' => :series
+        post 'series/:id' => :serie
       end
     end
   end
