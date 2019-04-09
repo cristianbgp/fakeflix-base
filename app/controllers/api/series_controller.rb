@@ -9,7 +9,12 @@ module Api
     end
 
     def show
-      render json: Serie.find(params[:id]), status: :ok
+      render json: Serie.find(params[:id]).as_json(include: :episodes), status: :ok
+    end
+
+    def rating
+      Serie.update(params[:id], :rating => params[:rating])
+      render json: { message: "Update successfull rating serie" }, status: :ok
     end
   end
 end
