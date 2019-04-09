@@ -9,19 +9,17 @@ module Api
     end
 
     def show
-      render json: Movie.find(params[:id])
+      render json: Movie.find(params[:id]), status: :ok
     end
 
     def playback
-      movie = Movie.find(params[:id])
-      movie.playback = params[:progress]
-      movie.save()
-      render json: { message: "Update playback movie" }, status: :ok
+      movie = Movie.update(params[:id], playback: params[:progress])
+      render json: movie, status: :ok
     end
   
     def rating
-      Movie.update(params[:id], rating: params[:rating])
-      render json: { message: "Update rating movie" }, status: :ok
+      movie = Movie.update(params[:id], rating: params[:rating])
+      render json: movie, status: :ok
     end
   
   end

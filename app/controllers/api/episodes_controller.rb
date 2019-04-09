@@ -9,10 +9,8 @@ module Api
     end
   
     def playback
-      episode = Episode.find(params[:id])
-      episode.playback = params[:progress]
-      episode.save()
-      render json: { message: "Update playback episode" }, status: :ok
-    end
+      episode = Episode.update(params[:id], playback: params[:progress])
+      render json: episode, status: :ok
+  end
   end
 end

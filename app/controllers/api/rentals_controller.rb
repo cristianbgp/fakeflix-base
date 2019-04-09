@@ -10,18 +10,18 @@ module Api
   
     def movie
       movie_found = Movie.find(params[:id])
-      movie_found.rentals.create(
+      rental = movie_found.rentals.create(
         paid_price: movie_found.price
       )
-      render json: { message: "Rent a movie" }, status: :created
+      render json: rental, status: :created
     end
     
     def serie
       serie_found = Serie.find(params[:id])
-      serie_found.rentals.create(
+      rental = serie_found.rentals.create(
         paid_price: serie_found.price
       )
-      render json: { message: "Rent a serie" }, status: :created
+      render json: rental, status: :created
     end
   end
 end
