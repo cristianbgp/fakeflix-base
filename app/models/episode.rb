@@ -1,5 +1,9 @@
 class Episode < ApplicationRecord
   belongs_to :serie
+
+  def serie_id
+    serie.id
+  end
 end
 
 # == Schema Information

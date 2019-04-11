@@ -5,7 +5,7 @@ module Api
     end
   
     def show
-      render json: Episode.find(params[:id]), status: :ok
+      render json: Episode.find(params[:id]).as_json(methods: :serie_id)
     end
   
     def playback
