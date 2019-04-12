@@ -54,13 +54,6 @@ describe Api::SeriesController do
       expected_serie = JSON.parse(response.body)
       expect(expected_serie["id"]).to eq(@serie.id)
     end
-  
-    it 'render the correct @serie with episodes' do
-      get :show, params: { id: @serie }
-      expected_serie = JSON.parse(response.body)
-      expect(expected_serie["episodes"].size).to eq(1)
-      expect(expected_serie["episodes"][0]["title"]).to eq("Something")
-    end
   end
 
   describe "PATCH update rating" do

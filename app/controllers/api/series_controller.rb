@@ -2,14 +2,20 @@ module Api
   class SeriesController < ApplicationController
     def index
       if params.key? "filter"
-        render json: Serie.where(status: params[:filter]), status: :ok
+        series = Serie.where(status: params[:filter])
       else
-        render json: Serie.all, status: :ok
+        series = Serie.all
       end
+      render json: series.as_json(methods: :rented)
     end
 
     def show
-      render json: Serie.find(params[:id]).as_json(include: :episodes), status: :ok
+      render json: Serie.find(params[:id]).as_json(methods: [
+        :rented,
+        :total_duration,
+        :episodes_list,
+        :episodes_count
+      ])
     end
 
     def rating

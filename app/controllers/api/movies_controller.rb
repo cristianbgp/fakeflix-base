@@ -2,14 +2,15 @@ module Api
   class MoviesController < ApplicationController
     def index
       if params.key? "filter"
-        render json: Movie.where(status: params[:filter]), status: :ok
+        movies = Movie.where(status: params[:filter])
       else
-        render json: Movie.all, status: :ok
+        movies = Movie.all
       end
+      render json: movies.as_json(methods: :rented)
     end
 
     def show
-      render json: Movie.find(params[:id]), status: :ok
+      render json: Movie.find(params[:id]).as_json(methods: :rented)
     end
 
     def playback
