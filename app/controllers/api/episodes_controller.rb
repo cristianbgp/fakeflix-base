@@ -11,6 +11,6 @@ module Api
     def playback
       episode = Episode.update(params[:id], playback: params[:progress])
       render json: episode, status: :ok
-  end
+    end
   end
 end
