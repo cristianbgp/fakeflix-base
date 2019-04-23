@@ -34,3 +34,10 @@ serie.rentals.create(
   paid_price: rand(400) + 1
 )
 end
+
+# Create users
+User.destroy_all
+User.create(name: 'Codeable', email: 'hello@codeable.pe', password: '123456', role: 'regular')
+User.create(name: 'Able', email: 'hello@able.co', password: '123456', role: 'admin')
+
+p 'Seed Data Created'
