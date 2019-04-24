@@ -1,6 +1,7 @@
 module Api
   class MoviesController < ApplicationController
     def index
+      authorize(Movie)
       if params.key? "filter"
         movies = Movie.where(status: params[:filter])
       else
@@ -10,6 +11,7 @@ module Api
     end
 
     def show
+      authorize(Movie)
       render json: Movie.find(params[:id]).as_json(methods: :rented)
     end
 
@@ -24,6 +26,7 @@ module Api
     end
     
     def create
+      authorize(Movie)
       @movie = Movie.new(movie_params)
       if @movie.save
         render json: @movie, status: :ok
@@ -33,6 +36,7 @@ module Api
     end
   
     def update
+      authorize(Movie)
       @movie = Movie.find(params[:id])
       if @movie.update(movie_params)
         render json: @movie, status: :ok
@@ -42,6 +46,7 @@ module Api
     end
   
     def destroy
+      authorize(Movie)
       @movie = Movie.find(params[:id])
       @movie.destroy
       render nothing: true, status: :no_content

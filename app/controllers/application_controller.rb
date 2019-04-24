@@ -1,8 +1,10 @@
 class ApplicationController < ActionController::API
   include ActionController::HttpAuthentication::Token::ControllerMethods
+  include Pundit
 
   before_action :require_login
-  before_action :authorization_user, only: [:create, :update, :destroy]
+  before_action :configure_permitted_parameters, if: :devise_controller?
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def require_login
     authenticate_token || render_unauthorized('Access denied')
@@ -25,7 +27,12 @@ class ApplicationController < ActionController::API
     end
   end
 
-  def authorization_user
-    render json: { error: 'Unnecessary permissions' }, status: 403 if @current_user.role != "admin"
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:role])
+  end
+
+  def user_not_authorized
+    flash[:alert] = "You are not authorized to perform this action."
+    render json: { error: 'Unnecessary permissions' }, status: 403
   end
 end
