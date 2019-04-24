@@ -23,5 +23,29 @@ module Api
       )
       render json: rental, status: :created
     end
+
+    def create
+      @rental = Rental.new(rental_params)
+      if @rental.save
+        render json: @rental, status: :ok
+      else
+        render json: @rental.errors, status: :unprocessable_entity
+      end
+    end
+  
+    def update
+      @rental = Rental.find(params[:id])
+      if @rental.update(rental_params)
+        render json: @rental, status: :ok
+      else
+        render json: @rental.errors, status: :unprocessable_entity
+      end
+    end
+  
+    def destroy
+      @rental = Rental.find(params[:id])
+      @rental.destroy
+      render nothing: true, status: :no_content
+    end
   end
 end

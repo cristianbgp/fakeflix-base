@@ -22,6 +22,29 @@ module Api
       movie = Movie.update(params[:id], rating: params[:rating])
       render json: movie, status: :ok
     end
+    
+    def create
+      @movie = Movie.new(movie_params)
+      if @movie.save
+        render json: @movie, status: :ok
+      else
+        render json: @movie.errors, status: :unprocessable_entity
+      end
+    end
   
+    def update
+      @movie = Movie.find(params[:id])
+      if @movie.update(movie_params)
+        render json: @movie, status: :ok
+      else
+        render json: @movie.errors, status: :unprocessable_entity
+      end
+    end
+  
+    def destroy
+      @movie = Movie.find(params[:id])
+      @movie.destroy
+      render nothing: true, status: :no_content
+    end
   end
 end
